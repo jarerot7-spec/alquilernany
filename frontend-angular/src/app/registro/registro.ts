@@ -59,7 +59,7 @@ export class Registro {
     }
 
     //envio a spring boot/ mysql
-    this.http.post<any>('http:/localhost:8080/api/auth/register', {
+    this.http.post<any>(API_URL+'/api/auth/register', {
       nombre, apellido, dni, correo, telefono, password
     }).subscribe({
       next: (data)=> {
