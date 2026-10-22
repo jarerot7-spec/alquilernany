@@ -1,0 +1,70 @@
+<div class="auth-container">
+
+    <div class="auth-info">
+        <a routerLink="/" class="auth-logo">
+            <span class="logo-icon">N</span>
+            <strong>NanySmart</strong>
+        </a>
+        
+        <div class="info-content">
+            <span class="small-title">BIENVENIDO DE NUEVO</span>
+            <h1>Todo lo relacionado con tu alquiler, en un solo lugar.</h1>
+            <p>Ingresa a tu cuenta para consultar y gestionar la información de NanySmart.</p>
+        
+            <div class="info-list">
+                <div><span>✓</span>Información organizada</div>
+                <div><span>✓</span>Seguimiento de incidencias</div>
+                <div><span>✓</span>Gestión centralizada</div>
+            </div>
+        </div>
+
+        <div class="auth-footer">© 2026 NanySmart</div>
+    </div>
+
+    <div class="auth-form-container">
+        <div class="auth-form">
+            <div class="mobile-logo">
+                <a routerLink="/" class="auth-logo">
+                    <span class="logo-icon">N</span>
+                    <strong>NanySmart</strong>
+                </a>
+            </div>
+
+            <div class="form-header">
+                <span class="small-title">INICIAR SESIÓN</span>
+                <h2>Bienvenido.</h2>
+                <p>Ingresa tus datos para continuar.</p>
+            </div>
+
+            <form ngNativeValidate (ngSubmit)="iniciarSesion()">
+                <div class="input-group">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" [(ngModel)]="correo"
+                    placeholder="correo@ejemplo.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" [(ngModel)]="password"
+                    placeholder="Tu contraseña" required>
+                </div>
+
+                <div class="form-message"
+                    [class.error]="tipo() === 'error'"
+                    [class.success]="tipo() === 'success'">
+                    {{ mensaje() }}
+                </div>
+
+                <button type="submit" class="auth-button">Iniciar sesión</button>
+            </form>
+
+            <p class="switch-form">
+                ¿Todavía no tienes una cuenta?
+                <a routerLink="/registro">Crear cuenta</a>
+            </p>
+
+            <a routerLink="/" class="back-home">← Volver al inicio</a>
+
+        </div>
+    </div>
+</div>

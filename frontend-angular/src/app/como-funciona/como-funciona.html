@@ -1,0 +1,47 @@
+
+    <header class="navbar">
+        <a class="logo" routerLink="/"><span class="logo-icon">N</span><span>NanySmart</span></a>
+        <nav class="nav-links" aria-label="Navegación principal">
+            <a routerLink="/">Inicio</a>
+            <a routerLink="/nosotros">¿Qué es?</a>
+            <a routerLink="/funciones">Funciones</a>
+            <a routerLink="/como-funciona" aria-current="page">Cómo funciona</a>
+        </nav>
+        <div class="nav-buttons">
+            <a routerLink="/login" class="btn btn-outline">Iniciar sesión</a>
+            <a routerLink="/registro" class="btn btn-primary">Crear cuenta</a>
+        </div>
+    </header>
+    <main>
+        <section class="section how page-content">
+            <div class="section-header">
+                <span class="section-tag">CÓMO FUNCIONA</span>
+                <h1>Comienza en pocos pasos.</h1>
+                <p>Una ruta sencilla para tener tu información de alquiler organizada y a mano.</p>
+            </div>
+            <div class="steps">
+                <article class="step">
+                    <div class="step-number">1</div>
+                    <div><h2>Crea tu cuenta</h2><p>Regístrate como propietario o inquilino.</p></div>
+                </article>
+                <article class="step">
+                    <div class="step-number">2</div>
+                    <div><h2>Gestiona tu información</h2><p>Registra inmuebles y contratos cuando la plataforma esté habilitada.</p></div>
+                </article>
+                <article class="step">
+                    <div class="step-number">3</div>
+                    <div><h2>Registra incidencias</h2><p>Informa cualquier problema relacionado con el alquiler.</p></div>
+                </article>
+                <article class="step">
+                    <div class="step-number">4</div>
+                    <div><h2>Da seguimiento</h2><p>Consulta los avances y acuerdos registrados.</p></div>
+                </article>
+            </div>
+            <div class="page-action"><a routerLink="/registro" class="btn btn-primary btn-large">Crear cuenta</a></div>
+        </section>
+    </main>
+    <footer class="footer">
+        <a class="footer-logo" routerLink="/"><span class="logo-icon">N</span><strong>NanySmart</strong></a>
+        <p>Gestión inteligente para contratos de alquiler.</p>
+        <span class="copyright">© 2026 NanySmart. Todos los derechos reservados.</span>
+    </footer>

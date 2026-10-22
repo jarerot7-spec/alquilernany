@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Dashboard | NanySmart</title>
+
+    <link
+        rel="stylesheet"
+        href="Css/dashboard.css"
+    >
+</head>
+
+<body>
+    <!-- = SIDEBAR = -->
+    <aside class="sidebar">
+        <div class="dashboard-logo">
+            <span>
+                N
+            </span>
+            NanySmart
+        </div>
+
+        <nav>
+            <a href="#inicio" class="active" data-dashboard-tab="inicio" aria-current="page">
+                Inicio
+            </a>
+            <a href="#contrato" data-dashboard-tab="contrato">
+                Contrato
+            </a>
+            <a href="#ofertas" data-dashboard-tab="ofertas">
+                Ofertas de alquiler
+            </a>
+            <a href="#solicitudes" data-dashboard-tab="solicitudes">
+                Solicitudes
+            </a>
+            <a href="#simulacion" data-dashboard-tab="simulacion">
+                Simulación
+            </a>
+            <a href="#escenarios" data-dashboard-tab="escenarios">
+                Escenarios
+            </a>
+        </nav>
+
+        <button
+            id="logoutButton"
+            class="logout-button">
+            Cerrar sesión
+        </button>
+    </aside>
+
+
+    <!-- = MAIN = -->
+
+    <main class="dashboard">
+        <header class="dashboard-header">
+            <div>
+                <span>
+                    PANEL PRINCIPAL
+                </span>
+                <h1 id="welcome">
+                    Bienvenido
+                </h1>
+            </div>
+        </header>
+
+        <section class="dashboard-content">
+            <section class="dashboard-view" id="inicio" data-dashboard-view="ofertas" aria-label="Resumen de cuenta">
+            <div class="welcome-card">
+                <div>
+                    <span>
+                        NANYSMART
+                    </span>
+                    <h2>
+                        Gestiona tus alquileres
+                        de manera organizada.
+                    </h2>
+                    <p>
+                        Desde aquí podrás consultar tus contratos,
+                        registrar incidencias y realizar seguimiento
+                        de tus procesos.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span>OFERTAS PUBLICADAS</span>
+                    <strong id="userOfferCount">
+                        0
+                    </strong>
+                    <p>Viviendas en alquiler</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>SOLICITUDES</span>
+                    <strong id="requestCount">
+                        0
+                    </strong>
+                    <p>Pendientes de respuesta</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>SIMULACIONES</span>
+                    <strong id="simulationCount">
+                        0
+                    </strong>
+                    <p>Acuerdos aceptados</p>
+                </div>
+
+
+                <div class="stat-card">
+                    <span>
+                        PAGOS
+                    </span>
+                    <strong>
+                        0
+                    </strong>
+                    <p>
+                        Pagos pendientes
+                    </p>
+                </div>
+            </div>
+            </section>
+
+            <section class="contract-section dashboard-view" id="contrato" data-dashboard-view="contrato" aria-labelledby="contract-title" hidden>
+                <div class="contract-heading">
+                    <span class="offers-eyebrow">PUBLICA TU INMUEBLE</span>
+                    <h2 id="contract-title">Pon tu vivienda en alquiler</h2>
+                    <p>Completa los datos y el precio; por ahora la oferta queda guardada en este navegador.</p>
+                </div>
+
+                <div class="contract-panel">
+                    <form id="propertyForm" class="property-form">
+                        <div class="property-fields">
+                            <div class="property-field">
+                                <label for="propertyType">Tipo de inmueble</label>
+                                <select id="propertyType" name="tipo" required>
+                                    <option value="">Selecciona el tipo</option>
+                                    <option value="Departamento">Departamento</option>
+                                    <option value="Casa">Casa</option>
+                                    <option value="Habitación">Habitación</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="propertyTitle">Título de la oferta</label>
+                                <input id="propertyTitle" name="titulo" type="text" maxlength="80" placeholder="Ej. Departamento iluminado con balcón" required>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="monthlyPrice">Precio mensual (S/)</label>
+                                <input id="monthlyPrice" name="precio" type="number" min="1" step="0.01" placeholder="1800" required>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="propertyLocation">Distrito y ciudad</label>
+                                <input id="propertyLocation" name="ubicacion" type="text" maxlength="100" placeholder="Ej. Miraflores, Lima" required>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="propertyAddress">Dirección o referencia</label>
+                                <input id="propertyAddress" name="direccion" type="text" maxlength="160" placeholder="Dirección aproximada (opcional)">
+                            </div>
+
+                            <div class="property-field">
+                                <label for="contactPhone">Teléfono de contacto</label>
+                                <input id="contactPhone" name="telefono" type="tel" maxlength="20" placeholder="Tu teléfono" required>
+                            </div>
+
+                            <div class="property-field property-field-wide">
+                                <label for="propertyDescription">Descripción</label>
+                                <textarea id="propertyDescription" name="descripcion" rows="3" maxlength="700" placeholder="Describe los ambientes, servicios cercanos y condiciones del alquiler." required></textarea>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="bedrooms">Dormitorios</label>
+                                <input id="bedrooms" name="dormitorios" type="number" min="0" step="1" value="1" required>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="bathrooms">Baños</label>
+                                <input id="bathrooms" name="banos" type="number" min="0" step="1" value="1" required>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="propertyArea">Área (m²)</label>
+                                <input id="propertyArea" name="area" type="number" min="1" step="0.1" placeholder="70" required>
+                            </div>
+
+                            <div class="property-field">
+                                <label for="depositPrice">Depósito o garantía (S/)</label>
+                                <input id="depositPrice" name="garantia" type="number" min="0" step="0.01" placeholder="Opcional">
+                            </div>
+
+                            <div class="property-field">
+                                <label for="maintenancePrice">Mantenimiento mensual (S/)</label>
+                                <input id="maintenancePrice" name="mantenimiento" type="number" min="0" step="0.01" placeholder="Opcional">
+                            </div>
+
+                            <div class="property-field">
+                                <label for="propertyPhoto">Foto del inmueble (opcional)</label>
+                                <input id="propertyPhoto" name="foto" type="file" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="property-form-actions">
+                            <p id="propertyMessage" class="property-message" role="status" aria-live="polite"></p>
+                            <button class="publish-button" type="submit">Guardar oferta</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="my-offers-section">
+                    <div class="my-offers-heading">
+                        <h3>Mis ofertas</h3>
+                        <span id="myOfferCount">0 publicaciones</span>
+                    </div>
+                    <div id="myRentalGrid" class="rental-grid user-rental-grid"></div>
+                </div>
+
+            </section>
+
+            <section class="requests-section dashboard-view" id="solicitudes" data-dashboard-view="solicitudes" aria-labelledby="requests-title" hidden>
+                <div class="contract-heading">
+                    <span class="offers-eyebrow">NEGOCIACIÓN DE ALQUILER</span>
+                    <h2 id="requests-title">Solicitudes</h2>
+                    <p>Revisa las propuestas que recibiste y da seguimiento a las que enviaste.</p>
+                </div>
+
+                <div class="received-requests-section">
+                    <div class="my-offers-heading">
+                        <h3>Recibidas</h3>
+                        <span id="receivedRequestCount">0 solicitudes</span>
+                    </div>
+                    <div id="receivedRequestGrid" class="request-grid"></div>
+                </div>
+
+                <div class="sent-requests-section">
+                    <div class="my-offers-heading">
+                        <h3>Enviadas</h3>
+                        <span id="sentRequestCount">0 solicitudes</span>
+                    </div>
+                    <div id="sentRequestGrid" class="request-grid"></div>
+                </div>
+            </section>
+
+            <section class="simulation-section dashboard-view" id="simulacion" data-dashboard-view="simulacion" aria-labelledby="simulation-title" hidden>
+                <div class="contract-heading">
+                    <span class="offers-eyebrow">ACUERDO DE ALQUILER</span>
+                    <h2 id="simulation-title">Simulación de situaciones</h2>
+                    <p>El propietario define primero las condiciones; el inquilino también podrá consultarlas y simular situaciones. Los resultados son orientativos y no reemplazan el contrato.</p>
+                </div>
+
+                <div id="simulationGate" class="empty-offers" hidden>
+                    La simulación estará disponible cuando una de tus solicitudes de alquiler sea aceptada.
+                </div>
+
+                <div id="simulationWorkspace" hidden>
+                    <div class="simulation-agreement-panel">
+                        <div class="property-field">
+                            <label for="acceptedAgreementSelect">Acuerdo aceptado</label>
+                            <select id="acceptedAgreementSelect"></select>
+                        </div>
+                        <p id="simulationAgreementSummary" class="request-terms"></p>
+                    </div>
+
+                    <form id="simulationConditionsForm" class="contract-panel simulation-conditions" hidden>
+                        <div class="contract-heading">
+                            <span class="offers-eyebrow">CONFIGURACIÓN DEL PROPIETARIO</span>
+                            <h3>Define las condiciones</h3>
+                            <p>Estas condiciones se compartirán con el inquilino y servirán de referencia para las simulaciones.</p>
+                        </div>
+                        <div class="property-fields">
+                            <div class="property-field">
+                                <label for="simulationDepositAmount">Monto de garantía retenida (S/)</label>
+                                <input id="simulationDepositAmount" name="montoGarantia" type="number" min="0" step="0.01" required>
+                            </div>
+                            <div class="property-field">
+                                <label for="simulationGraceDays">Días de gracia para el pago</label>
+                                <input id="simulationGraceDays" name="diasGracia" type="number" min="0" step="1" value="5" required>
+                            </div>
+                            <div class="property-field">
+                                <label for="simulationLateFee">Recargo diario después de la gracia (S/)</label>
+                                <input id="simulationLateFee" name="recargoDiario" type="number" min="0" step="0.01" value="0" required>
+                            </div>
+                            <div class="property-field">
+                                <label for="simulationRepairLimit">Reparaciones menores a cargo del inquilino hasta (S/)</label>
+                                <input id="simulationRepairLimit" name="limiteReparacion" type="number" min="0" step="0.01" value="200" required>
+                            </div>
+                            <div class="property-field">
+                                <label for="simulationNoticeDays">Aviso mínimo para salida anticipada (días)</label>
+                                <input id="simulationNoticeDays" name="diasAviso" type="number" min="0" step="1" value="30" required>
+                            </div>
+                            <div class="property-field">
+                                <label for="simulationExitPenalty">Penalidad fija por salida sin aviso suficiente (S/)</label>
+                                <input id="simulationExitPenalty" name="penalidadSalida" type="number" min="0" step="0.01" value="0" required>
+                            </div>
+                            <div class="property-field">
+                                <label for="simulationResponseHours">Plazo de respuesta a desacuerdos (horas)</label>
+                                <input id="simulationResponseHours" name="plazoRespuesta" type="number" min="1" step="1" value="48" required>
+                            </div>
+                            <div class="property-field">
+                                <label for="simulationResolutionPath">Vía inicial para resolver desacuerdos</label>
+                                <select id="simulationResolutionPath" name="viaResolucion" required>
+                                    <option value="dialogo">Diálogo directo</option>
+                                    <option value="mediacion">Mediación</option>
+                                    <option value="notificacion">Notificación formal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="property-form-actions">
+                            <p id="simulationConditionsMessage" class="property-message" role="status" aria-live="polite"></p>
+                            <button class="publish-button" type="submit">Guardar condiciones</button>
+                        </div>
+                    </form>
+
+                    <div id="simulationWaiting" class="empty-offers" hidden>
+                        El propietario todavía no ha definido las condiciones. Vuelve a esta pestaña cuando las haya guardado.
+                    </div>
+
+                    <div id="simulationConditionsSummary" class="simulation-conditions-summary" hidden>
+                        <h3>Condiciones definidas por el propietario</h3>
+                        <div id="simulationConditionsDetails" class="simulation-conditions-details"></div>
+                    </div>
+
+                    <!-- Aviso de estado para el PROPIETARIO: cómo respondió el inquilino -->
+                    <div id="simulationOwnerStatus" class="simulation-response-status" hidden>
+                        <span id="simulationOwnerStatusBadge" class="simulation-response-badge"></span>
+                        <p id="simulationOwnerStatusText" class="simulation-response-text"></p>
+                    </div>
+
+                    <!-- Panel de respuesta para el INQUILINO -->
+                    <div id="simulationResponsePanel" class="simulation-response-panel" hidden>
+                        <div class="contract-heading">
+                            <span class="offers-eyebrow">TU RESPUESTA</span>
+                            <h3>¿Aceptas las condiciones del propietario?</h3>
+                            <p>Revisa las condiciones y, si no estás de acuerdo, indica el motivo para rechazarlas.</p>
+                        </div>
+                        <div id="simulationResponseStatus" class="simulation-response-status" hidden>
+                            <span id="simulationResponseBadge" class="simulation-response-badge"></span>
+                            <p id="simulationResponseText" class="simulation-response-text"></p>
+                        </div>
+                        <div class="property-field request-field-wide">
+                            <label for="simulationRejectReason">Motivo del rechazo (opcional)</label>
+                            <textarea id="simulationRejectReason" name="motivoRechazo" rows="3" maxlength="500" placeholder="Explica qué condición no te parece adecuada."></textarea>
+                        </div>
+                        <div class="property-form-actions">
+                            <p id="simulationResponseMessage" class="property-message" role="status" aria-live="polite"></p>
+                            <button id="simulationRejectButton" class="reject-button" type="button">Rechazar condiciones</button>
+                        </div>
+                    </div>
+
+                    <div id="simulationQuickCases" class="simulation-quick-cases" hidden>
+                        <div class="simulation-explorer-heading">
+                            <div>
+                                <span class="offers-eyebrow">CASOS FRECUENTES</span>
+                                <h3>Simulación rápida</h3>
+                            </div>
+                            <span class="simulation-count">4 escenarios</span>
+                        </div>
+
+                        <div class="simulation-grid">
+                            <article class="simulation-card">
+                                <span class="offers-eyebrow">PAGOS</span>
+                                <h3>Retrasos en pagos</h3>
+                                <p>Calcula el recargo posible según los días de gracia acordados.</p>
+                                <form data-quick-case="pago" class="simulation-case-form">
+                                    <label for="quickPaymentDays">Días de retraso</label>
+                                    <input id="quickPaymentDays" name="dias" type="number" min="0" step="1" value="0" required>
+                                    <button class="simulate-button" type="submit">Simular</button>
+                                    <p id="quickPaymentResult" class="simulation-result" role="status" aria-live="polite"></p>
+                                </form>
+                            </article>
+
+                            <article class="simulation-card">
+                                <span class="offers-eyebrow">REPARACIONES</span>
+                                <h3>Reparaciones</h3>
+                                <p>Compara el costo estimado con el límite definido por el propietario.</p>
+                                <form data-quick-case="reparacion" class="simulation-case-form">
+                                    <label for="quickRepairCost">Costo estimado (S/)</label>
+                                    <input id="quickRepairCost" name="monto" type="number" min="0" step="0.01" value="0" required>
+                                    <button class="simulate-button" type="submit">Simular</button>
+                                    <p id="quickRepairResult" class="simulation-result" role="status" aria-live="polite"></p>
+                                </form>
+                            </article>
+
+                            <article class="simulation-card">
+                                <span class="offers-eyebrow">SALIDA</span>
+                                <h3>Salida anticipada</h3>
+                                <p>Revisa el aviso necesario y la penalidad de referencia acordada.</p>
+                                <form data-quick-case="salida" class="simulation-case-form">
+                                    <label for="quickExitNoticeDays">Días de aviso disponibles</label>
+                                    <input id="quickExitNoticeDays" name="dias" type="number" min="0" step="1" value="30" required>
+                                    <button class="simulate-button" type="submit">Simular</button>
+                                    <p id="quickExitResult" class="simulation-result" role="status" aria-live="polite"></p>
+                                </form>
+                            </article>
+
+                            <article class="simulation-card">
+                                <span class="offers-eyebrow">GARANTÍA Y LIQUIDACIÓN</span>
+                                <h3>Garantía y Renovación Final</h3>
+                                <p>Evalúa si la garantía cubre reparaciones y si el saldo restante permite renovar o pagar un mes más de alquiler.</p>
+                                <form data-quick-case="garantia" class="simulation-case-form">
+                                    <label for="quickDepositAmount">Monto de garantía retenida (S/)</label>
+                                    <input id="quickDepositAmount" name="montoGarantia" type="number" min="0" step="0.01" required>
+                                    <small id="quickDepositHelper" class="input-helper">Jalado de las condiciones del propietario.</small>
+
+                                    <label for="quickApplyToRent">¿Aplica al pago de un mes / renovación?</label>
+                                    <select id="quickApplyToRent" name="aplicaAlquiler" required>
+                                        <option value="si">Sí, cubrir cuota de alquiler / renovación</option>
+                                        <option value="no">No, liquidación / devolución en efectivo</option>
+                                    </select>
+
+                                    <label for="quickDamageCost">Descuento por reparaciones / daños (S/)</label>
+                                    <input id="quickDamageCost" name="montoDanios" type="number" min="0" step="0.01" value="0">
+                                    <small id="quickDamageHelper" class="input-helper">Sincronizado con la última reparación simulada.</small>
+
+                                    <button class="simulate-button" type="submit">Simular liquidación</button>
+                                    <p id="quickDepositResult" class="simulation-result" role="status" aria-live="polite"></p>
+                                </form>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="scenarios-section dashboard-view" id="escenarios" data-dashboard-view="escenarios" aria-labelledby="scenarios-title" hidden>
+                <div class="contract-heading">
+                    <span class="offers-eyebrow">SIMULADOR DEL ACUERDO</span>
+                    <h2 id="scenarios-title">Todas las situaciones</h2>
+                    <p>Explora las situaciones del alquiler en una pestaña aparte. Los resultados son orientativos y no reemplazan el contrato.</p>
+                </div>
+
+                <div id="scenarioGate" class="empty-offers" hidden>
+                    Los escenarios estarán disponibles cuando una de tus solicitudes de alquiler sea aceptada.
+                </div>
+
+                <div id="scenarioWorkspace" hidden>
+                    <div class="simulation-agreement-panel">
+                        <div class="property-field">
+                            <label for="scenarioAgreementSelect">Acuerdo aceptado</label>
+                            <select id="scenarioAgreementSelect"></select>
+                        </div>
+                        <p id="scenarioAgreementSummary" class="request-terms"></p>
+                    </div>
+
+                    <div id="scenarioConditionsSummary" class="simulation-conditions-summary" hidden>
+                        <h3>Condiciones definidas por el propietario</h3>
+                        <div id="scenarioConditionsDetails" class="simulation-conditions-details"></div>
+                    </div>
+
+                    <div id="scenarioConditionsPrompt" class="empty-offers" hidden>
+                        El propietario debe definir las condiciones primero en la pestaña Simulación.
+                    </div>
+
+                    <div id="scenarioWaiting" class="empty-offers" hidden>
+                        El propietario todavía no ha definido las condiciones. Vuelve cuando las haya guardado.
+                    </div>
+
+                    <div id="simulationCases" class="simulation-explorer" hidden>
+                        <div class="simulation-explorer-heading">
+                            <div>
+                                <span class="offers-eyebrow">ESCENARIOS PARA EVALUAR</span>
+                                <h3>¿Qué situación quieres simular?</h3>
+                            </div>
+                            <span class="simulation-count">100 situaciones</span>
+                        </div>
+
+                        <form id="simulationScenarioForm" class="contract-panel simulation-scenario-form">
+                            <div class="property-fields">
+                                <div class="property-field">
+                                    <label for="simulationCategory">Categoría</label>
+                                    <select id="simulationCategory" name="categoria" required></select>
+                                </div>
+                                <div class="property-field property-field-wide">
+                                    <label for="simulationScenario">Situación</label>
+                                    <select id="simulationScenario" name="situacion" required></select>
+                                </div>
+                                <div id="simulationAmountField" class="property-field" hidden>
+                                    <label id="simulationAmountLabel" for="simulationAmount">Monto relacionado (S/)</label>
+                                    <input id="simulationAmount" name="monto" type="number" min="0" step="0.01" placeholder="0">
+                                </div>
+                                <div id="simulationDaysField" class="property-field" hidden>
+                                    <label id="simulationDaysLabel" for="simulationDays">Días relacionados</label>
+                                    <input id="simulationDays" name="dias" type="number" min="0" step="1" placeholder="0">
+                                </div>
+                                <div class="property-field property-field-wide">
+                                    <label for="simulationScenarioDetails">Detalles del caso (opcional)</label>
+                                    <textarea id="simulationScenarioDetails" name="detalles" rows="3" maxlength="500" placeholder="Añade información para que ambas partes entiendan el caso."></textarea>
+                                </div>
+                            </div>
+                            <div class="simulation-scenario-actions">
+                                <button class="simulate-button" type="submit">Simular situación</button>
+                                <p id="simulationScenarioResult" class="simulation-result" role="status" aria-live="polite"></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="offers-section dashboard-view" id="ofertas" data-dashboard-view="inicio" aria-labelledby="offers-title" hidden>
+                <div class="offers-heading">
+                    <div>
+                        <span class="offers-eyebrow">INMUEBLES PARA ALQUILAR</span>
+                        <h2 id="offers-title">Ofertas de alquiler</h2>
+                        <p>Consulta las viviendas que se han puesto en alquiler.</p>
+                    </div>
+                </div>
+
+                <div class="published-offers">
+                    <div class="my-offers-heading">
+                        <h3>Mis ofertas</h3>
+                        <span id="offersTabMyCount">0 publicaciones</span>
+                    </div>
+                    <div id="offersTabMyGrid" class="rental-grid user-rental-grid">
+                        <p class="empty-offers">Las viviendas que guardes en Contrato aparecerán aquí.</p>
+                    </div>
+                </div>
+
+                <div class="other-offers">
+                    <div class="my-offers-heading">
+                        <h3>Otras ofertas</h3>
+                        <span id="otherOfferCount">0 publicaciones</span>
+                    </div>
+                    <div id="otherRentalGrid" class="rental-grid user-rental-grid">
+                        <p class="empty-offers">Las ofertas de otras cuentas aparecerán aquí.</p>
+                    </div>
+                </div>
+
+                <div class="sample-offers">
+                    <div class="my-offers-heading">
+                        <h3>Viviendas de muestra</h3>
+                    </div>
+                <div class="rental-grid">
+                    <article class="rental-card">
+                        <div class="rental-photo">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=85" alt="Casa moderna con jardín y terraza" loading="lazy">
+                            <span class="listing-badge">CASA</span>
+                        </div>
+                        <div class="rental-details">
+                            <p class="rental-location">San Miguel, Lima</p>
+                            <h3>Casa amplia con jardín</h3>
+                            <p class="rental-description">Espacios iluminados, patio privado y sala comedor amplia. Cerca de comercios, parques y transporte público.</p>
+                            <div class="rental-footer">
+                                <span>3 dormitorios · 2 baños</span>
+                                <strong>S/ 2,800 <small>/ mes</small></strong>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="rental-card">
+                        <div class="rental-photo">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85" alt="Sala moderna y luminosa de un departamento" loading="lazy">
+                            <span class="listing-badge">DEPARTAMENTO</span>
+                        </div>
+                        <div class="rental-details">
+                            <p class="rental-location">Miraflores, Lima</p>
+                            <h3>Departamento con balcón</h3>
+                            <p class="rental-description">Departamento moderno con cocina equipada, balcón y buena iluminación natural, a pocos minutos de servicios y áreas verdes.</p>
+                            <div class="rental-footer">
+                                <span>2 dormitorios · 2 baños</span>
+                                <strong>S/ 2,400 <small>/ mes</small></strong>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="rental-card">
+                        <div class="rental-photo">
+                            <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85" alt="Interior acogedor de un departamento pequeño" loading="lazy">
+                            <span class="listing-badge">MINIDEPARTAMENTO</span>
+                        </div>
+                        <div class="rental-details">
+                            <p class="rental-location">Santiago de Surco, Lima</p>
+                            <h3>Espacio práctico y acogedor</h3>
+                            <p class="rental-description">Ambiente funcional con cocina abierta y espacios bien aprovechados, ideal para una persona o una pareja.</p>
+                            <div class="rental-footer">
+                                <span>1 dormitorio · 1 baño</span>
+                                <strong>S/ 1,650 <small>/ mes</small></strong>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                </div>
+            </section>
+
+
+        </section>
+
+        <dialog id="acceptanceDialog" class="request-dialog" aria-labelledby="requestDialogTitle">
+            <form id="acceptanceRequestForm" class="request-form">
+                <div class="request-dialog-heading">
+                    <div>
+                        <span class="offers-eyebrow">PROPUESTA DE ALQUILER</span>
+                        <h2 id="requestDialogTitle">Enviar solicitud de aceptación</h2>
+                        <p id="requestOfferSummary"></p>
+                    </div>
+                    <button id="closeRequestDialog" class="dialog-close" type="button">Cerrar</button>
+                </div>
+
+                <div class="request-fields">
+                    <div class="property-field">
+                        <label for="proposedPrice">Precio mensual que propones (S/)</label>
+                        <input id="proposedPrice" name="precioPropuesto" type="number" min="1" step="0.01" required>
+                    </div>
+                    <div class="property-field">
+                        <label for="proposedDeposit">Garantía que propones (S/)</label>
+                        <input id="proposedDeposit" name="garantiaPropuesta" type="number" min="0" step="0.01">
+                    </div>
+                    <div class="property-field">
+                        <label for="proposedStartDate">Fecha de ingreso propuesta</label>
+                        <input id="proposedStartDate" name="fechaIngreso" type="date">
+                    </div>
+                    <div class="property-field request-field-wide">
+                        <label for="requestMessageInput">Mensaje y otras condiciones</label>
+                        <textarea id="requestMessageInput" name="mensaje" rows="4" maxlength="700" placeholder="Cuéntale al propietario qué condiciones propones."></textarea>
+                    </div>
+                </div>
+
+                <p id="requestFormMessage" class="property-message" role="status" aria-live="polite"></p>
+                <div class="request-dialog-actions">
+                    <button id="cancelRequestDialog" class="dialog-secondary" type="button">Cancelar</button>
+                    <button class="publish-button" type="submit">Enviar solicitud</button>
+                </div>
+            </form>
+        </dialog>
+
+    </main>
+
+
+    <script src="Js/dashboard.js"></script>
+
+</body>
+
+</html>
