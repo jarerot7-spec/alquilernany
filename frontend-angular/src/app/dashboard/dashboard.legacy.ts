@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { API_URL } from '../api';
 /* =========================================
    NANYSMART - DASHBOARD
 ========================================= */
@@ -383,7 +384,7 @@ export function iniciarDashboard() {
 
         // Registrar el rechazo en el backend para que lo vea el propietario
         try {
-            await fetch(`http://localhost:8080/api/simulaciones/solicitud/${simulation.solicitudId}/respuesta`, {
+            await fetch(`${API_URL}/api/simulaciones/solicitud/${simulation.solicitudId}/respuesta`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ estado: "RECHAZADA", motivoRechazo: simulation.motivoRechazo })
@@ -474,7 +475,7 @@ export function iniciarDashboard() {
 
         // Guardar solicitud en la base de datos MySQL (Backend Spring Boot)
         try {
-            const res = await fetch("http://localhost:8080/api/solicitudes", {
+            const res = await fetch(API_URL + "/api/solicitudes", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(request)
@@ -538,7 +539,7 @@ export function iniciarDashboard() {
 
             // Guardar en la base de datos MySQL (Backend Spring Boot)
             try {
-                const res = await fetch("http://localhost:8080/api/ofertas", {
+                const res = await fetch(API_URL + "/api/ofertas", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(offer)
@@ -574,7 +575,7 @@ export function iniciarDashboard() {
 
     async function syncOffersFromBackend() {
         try {
-            const res = await fetch("http://localhost:8080/api/ofertas");
+            const res = await fetch(API_URL + "/api/ofertas");
             if (res.ok) {
                 const dbOffers = await res.json();
                 if (Array.isArray(dbOffers) && dbOffers.length > 0) {
@@ -591,7 +592,7 @@ export function iniciarDashboard() {
 
     async function syncRequestsFromBackend() {
         try {
-            const res = await fetch("http://localhost:8080/api/solicitudes");
+            const res = await fetch(API_URL + "/api/solicitudes");
             if (res.ok) {
                 const dbRequests = await res.json();
                 if (Array.isArray(dbRequests)) {
@@ -881,7 +882,7 @@ export function iniciarDashboard() {
 
         // Actualizar en la base de datos MySQL (Backend Spring Boot)
         try {
-            await fetch(`http://localhost:8080/api/solicitudes/${request.id}/estado`, {
+            await fetch(`${API_URL}/api/solicitudes/${request.id}/estado`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ estado: status })
@@ -981,7 +982,7 @@ export function iniciarDashboard() {
             viaResolucion: c.viaResolucion
         };
         try {
-            await fetch("http://localhost:8080/api/simulaciones", {
+            await fetch(API_URL + "/api/simulaciones", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -994,7 +995,7 @@ export function iniciarDashboard() {
     /* Trae las simulaciones del backend y las fusiona con las locales (preservando resultados ya calculados). */
     async function syncSimulationsFromBackend() {
         try {
-            const res = await fetch("http://localhost:8080/api/simulaciones");
+            const res = await fetch(API_URL + "/api/simulaciones");
             if (!res.ok) return;
             const dbSimulations = await res.json();
             if (!Array.isArray(dbSimulations) || dbSimulations.length === 0) return;

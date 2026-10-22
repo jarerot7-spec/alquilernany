@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { API_URL } from '../api';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
@@ -23,7 +24,7 @@ export class Login {
     this.mensaje.set('');
     this.tipo.set('');
 
-    this.http.post<any>('http://localhost:8080/api/auth/login',{
+    this.http.post<any>(API_URL + '/api/auth/login',{
       correo: this.correo.trim(),
       password: this.password
     }).subscribe({
